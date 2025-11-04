@@ -1,21 +1,59 @@
 "use client";
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useMemo } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { ArrowRight } from "lucide-react";
 
 export default function Home() {
+  const { scrollYProgress } = useScroll();
+
+  // About heading gradient color animation
+  const aboutHeadingColor = useTransform(
+    scrollYProgress,
+    [0.2, 0.35],
+    ["#ff5c00", "#ff6a00"]
+  );
+
+  const paragraphs: string[] = [
+    "Technofusion is a premier technology hub based in Nairobi, Kenya, dedicated to delivering intelligent, data-driven, and automated solutions that empower organizations to operate smarter and more efficiently.",
+    "We specialize in developing advanced digital systems, integrating artificial intelligence (AI) into everyday business operations, and creating intelligent platforms that drive innovation across multiple industries — from logistics and transport to finance, healthcare, manufacturing, and beyond.",
+    "At Technofusion, we believe in “AI for Everywhere” — building intelligent solutions that enhance productivity, enable automation, and transform decision-making processes across all sectors."
+  ];
+
+  // Animated paragraph renderer
+  const renderAnimatedParagraph = (text: string) => {
+    const words = useMemo(() => text.split(" "), [text]);
+    const totalWords = words.length;
+
+    return words.map((word: string, index: number) => {
+      // Spread word transitions across a larger scroll range for slower reveal
+      const start = 0.3 + (index / totalWords) * 0.5;
+      const end = start + 0.2;
+
+      const wordColor = useTransform(scrollYProgress, [start, end], ["#000000", "#ffffff"]);
+
+      return (
+        <motion.span
+          key={index}
+          style={{ display: "inline-block", color: wordColor }}
+          className="transition-colors duration-300"
+        >
+          {word}
+          {"\u00A0"}
+        </motion.span>
+      );
+    });
+  };
+
   return (
-    <main className="relative min-h-screen flex flex-col text-[var(--foreground)] bg-[var(--background)] overflow-hidden">
+    <main className="relative min-h-screen flex flex-col text-foreground bg-background overflow-hidden">
       <Navbar />
 
-      <div className="relative flex-grow flex flex-col items-center justify-center text-center px-6 py-15 max-w-6xl mx-auto mt-20 md:mt-28">
+      {/* Hero Section */}
+      <div className="relative grow flex flex-col items-center justify-center text-center px-6 py-15 max-w-6xl mx-auto mt-20 md:mt-28">
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-(--accent-green)/8 rounded-full blur-[140px] pointer-events-none"></div>
 
-        {/* Soft neutral background glow (removed orange/red) */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-[var(--accent-green)]/8 rounded-full blur-[140px] pointer-events-none"></div>
-
-        {/* Heading */}
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -28,9 +66,8 @@ export default function Home() {
             animate={{ y: [0, -4, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           >
-            {/* Auto-writing text */}
             <motion.span
-              className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff5c00] via-[#ff3a00] to-[#ff6a00] font-bold"
+              className="text-transparent bg-clip-text bg-linear-to-r from-[#ff5c00] via-[#ff3a00] to-[#ff6a00] font-bold"
               initial={{ width: 0 }}
               animate={{ width: "100%" }}
               transition={{ duration: 2, ease: "easeInOut", delay: 0.3 }}
@@ -44,7 +81,6 @@ export default function Home() {
               smart systems
             </motion.span>
 
-            {/* Smooth curved underline (3D illusion, but stays aligned) */}
             <motion.svg
               className="absolute -bottom-2 left-0 w-full"
               height="10"
@@ -81,7 +117,6 @@ export default function Home() {
           that help businesses work better.
         </motion.h1>
 
-        {/* Sub Text */}
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -89,14 +124,12 @@ export default function Home() {
           className="text-xl md:text-2xl text-gray-400 max-w-3xl mb-12 leading-relaxed"
         >
           At{" "}
-          <span className="text-[var(--accent-green)] font-semibold">
-            Technofusion
-          </span>
-          , we design intelligent software, automation tools, and AI-powered
+          <span className="text-accent-green font-semibold">Technofusion</span>,
+          we design intelligent software, automation tools, and AI-powered
           solutions that make organizations{" "}
-          <span className="text-[var(--accent)] font-medium">faster</span>,{" "}
+          <span className="text-accent font-medium">faster</span>,{" "}
           <span className="text-[#ff5c00] font-medium">sharper</span>, and more{" "}
-          <span className="text-[var(--accent)] font-medium">connected</span>.
+          <span className="text-accent font-medium">connected</span>.
         </motion.p>
 
         {/* Buttons */}
@@ -122,12 +155,33 @@ export default function Home() {
           <motion.button
             whileHover={{ scale: 1.05, y: -3 }}
             whileTap={{ scale: 0.98 }}
-            className="group relative px-8 py-4 rounded-xl font-semibold border-2 border-[var(--accent)] text-[var(--foreground)] hover:border-[var(--accent-green)] transition-all duration-300"
+            className="group relative px-8 py-4 rounded-xl font-semibold border-2 border-accent text-foreground hover:border-accent-green transition-all duration-300"
           >
             <span className="flex items-center gap-2">Let's Talk</span>
           </motion.button>
         </motion.div>
+
+        <div className="w-[90%] max-w-5xl h-1.5 bg-white mt-10 mx-auto opacity-20"></div>
       </div>
+
+      {/* About Section */}
+      <motion.section className="relative p-2 max-w-7xl mx-auto text-lg md:text-xl leading-relaxed">
+        <motion.h2
+          className="text-3xl md:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-linear-to-r from-[#ff5c00] via-[#ff3a00] to-[#ff6a00]"
+          style={{ color: aboutHeadingColor }}
+        >
+          About Technofusion
+        </motion.h2>
+
+        {paragraphs.map((p, idx) => (
+          <p key={idx} className="mb-4">
+            {renderAnimatedParagraph(p)}
+          </p>
+        ))}
+
+        {/* Demarcation line below About */}
+        <div className="w-[90%] max-w-5xl h-1.5 bg-white mt-15 mx-auto opacity-20"></div>
+      </motion.section>
 
       <Footer />
     </main>
