@@ -41,26 +41,3 @@ body {
                0 0 20px rgba(20, 226, 196, 0.3);
 }
 
-/* === NEW: GREEN ACCENTS === */
-.accent-green {
-  color: var(--accent-green);
-  text-shadow: 0 0 10px rgba(0, 255, 136, 0.2),
-               0 0 20px rgba(0, 255, 136, 0.3);
-}
-
-.border-green {
-  border: 1px solid var(--accent-green);
-}
-
-.bg-green {
-  background-color: var(--accent-green);
-  color: var(--background);
-}
-
-/* Subtle hover transition for green elements */
-.accent-green:hover,
-.border-green:hover,
-.bg-green:hover {
-  filter: brightness(1.1);
-  transition: filter 0.3s ease;
-}
