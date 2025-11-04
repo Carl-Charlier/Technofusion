@@ -1,8 +1,12 @@
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-background">
-      <h1 className="text-5xl text-whitefont-semibold tracking-tight">
-      </h1>
+    <main className="relative min-h-screen flex flex-col items-center justify-between bg-background text-foreground">
+      <Navbar />
+
+      <Footer />
     </main>
   );
 }
