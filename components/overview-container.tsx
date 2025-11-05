@@ -6,8 +6,8 @@ export default function OverviewContainer() {
           <span className="text-orange-500 font-normal">Designing</span>
           <span className="text-gray-600"> for</span>
         </h1>
-        <h2 className="text-5xl md:text-7xl font-bold text-center mt-2">
-          <span className="text-black">Unlimited </span>
+        <h2 className="text-5xl md:text-7xl text-center mt-2">
+          <span className="text-black font-bold">Unlimited </span>
           <span className="text-orange-500">Possibilities</span>
         </h2>
       </div>
