@@ -1,16 +1,167 @@
+import React, { useState, useEffect } from "react";
+
 export default function OverviewContainer() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const projects = [
+    {
+      image: "AI insurance Advisor.jpg",
+      title: "AI Insurance Advisor",
+      description:
+        "Intelligent insurance recommendations powered by AI",
+    },
+    {
+      image: "AI school.jpg",
+      title: "AI School Platform",
+      description:
+        "Personalized learning experiences for students",
+    },
+    {
+      image: "Spoofing detection.jpg",
+      title: "Spoofing Detection System",
+      description:
+        "Advanced security for fraud prevention (using AI and ML)",
+    },
+    {
+      image: "insurance 2.jpg",
+      title: "Insurance Analytics",
+      description:
+        "Data-driven insights for better coverage",
+    },
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % projects.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <section className="w-full flex justify-center mt-5">
-      <div className="bg-gray-200 w-[90%] rounded-lg flex flex-col items-center justify-center py-12 px-6">
-        <h1 className="text-5xl md:text-6xl font-light text-center">
-          <span className="text-orange-500 font-normal">Designing</span>
-          <span className="text-gray-600"> for</span>
-        </h1>
-        <h2 className="text-5xl md:text-7xl text-center mt-2">
-          <span className="text-black font-bold">Unlimited </span>
-          <span className="text-orange-500">Possibilities</span>
-        </h2>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-12 px-4 mt-5 rounded-xl">
+
+      <div className="max-w-7xl mx-auto text-center">
+
+        {/* Steps */}
+        <div className="flex justify-center items-center gap-8 mb-16">
+          {["Identify", "Create", "Deploy", "Monitor"].map((step, idx) => (
+            <div key={idx} className="flex items-center gap-3">
+              <div
+                className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold ${
+                  idx === 2 ? "bg-blue-600" : "bg-slate-400"
+                }`}
+              >
+                {idx + 1}
+              </div>
+              <span
+                className={`font-medium ${
+                  idx === 2 ? "text-blue-600" : "text-slate-600"
+                }`}
+              >
+                {step}
+              </span>
+              {idx < 3 && <div className="w-16 h-0.5 bg-slate-300" />}
+            </div>
+          ))}
+        </div>
+
+
+        {/* Carousel Section */}
+        <div className="relative mt-[5px]">
+          <div className="relative h-[600px] bg-gradient-to-br from-purple-100 to-blue-100 rounded-3xl p-8 shadow-2xl overflow-hidden">
+            {/* Background shapes */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-300 rounded-full opacity-20 animate-pulse" />
+            <div
+              className="absolute bottom-0 left-0 w-40 h-40 bg-purple-300 rounded-full opacity-20 animate-pulse"
+              style={{ animationDelay: "1s" }}
+            />
+
+            {/* Slides */}
+            <div className="relative h-full flex items-center justify-center overflow-hidden">
+              {projects.map((project, idx) => {
+                const position =
+                  (idx - currentSlide + projects.length) % projects.length;
+                let translateX = 0;
+                let opacity = 0;
+                let scale = 0.9;
+                let zIndex = 1;
+
+                if (position === 0) {
+                  translateX = 0;
+                  opacity = 1;
+                  scale = 1;
+                  zIndex = 3;
+                } else if (position === 1) {
+                  translateX = 85;
+                  opacity = 0.8;
+                  zIndex = 2;
+                } else if (position === projects.length - 1) {
+                  translateX = -85;
+                  opacity = 0.8;
+                  zIndex = 2;
+                } else {
+                  opacity = 0;
+                }
+
+                return (
+                  <div
+                    key={idx}
+                    className="absolute transition-all duration-700 ease-in-out"
+                    style={{
+                      transform: `translateX(${translateX}%) scale(${scale})`,
+                      opacity,
+                      zIndex,
+                    }}
+                  >
+                    <div className="bg-white rounded-xl overflow-hidden border-[3px] border-slate-800 shadow-2xl transform hover:scale-105 transition-transform">
+                      <div className="bg-slate-800 px-4 py-3 flex items-center gap-2">
+                        <div className="flex gap-1.5">
+                          <div className="w-3 h-3 rounded-full bg-red-500" />
+                          <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                          <div className="w-3 h-3 rounded-full bg-green-500" />
+                        </div>
+                        <div className="flex-1 text-center text-slate-300 text-sm font-medium">
+                          {project.title}
+                        </div>
+                      </div>
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-[450px] object-cover"
+                      />
+                    </div>
+
+                    {/* Project Info */}
+                    <div className="mt-6 text-center">
+                      <h3 className="text-xl font-bold text-slate-900 mb-2">
+                        {project.title}
+                      </h3>
+                      <p className="text-slate-600">
+                        {project.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Slide Indicators */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+              {projects.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentSlide(idx)}
+                  className={`w-2.5 h-2.5 rounded-full transition-all ${
+                    currentSlide === idx
+                      ? "bg-blue-600 w-8"
+                      : "bg-slate-400 hover:bg-slate-500"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
   );
 }
