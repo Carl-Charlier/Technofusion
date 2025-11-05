@@ -7,26 +7,22 @@ export default function OverviewContainer() {
     {
       image: "AI insurance Advisor.jpg",
       title: "AI Insurance Advisor",
-      description:
-        "Intelligent insurance recommendations powered by AI",
+      description: "Intelligent insurance recommendations powered by AI",
     },
     {
       image: "AI school.jpg",
       title: "AI School Platform",
-      description:
-        "Personalized learning experiences for students",
+      description: "Personalized learning experiences for students",
     },
     {
       image: "Spoofing detection.jpg",
-      title: "Cybersecurity Spoofing Detection System(ML)",
-      description:
-        "Advanced security for fraud prevention (using AI and ML)",
+      title: "Cybersecurity Spoofing Detection System (ML)",
+      description: "Advanced security for fraud prevention (using AI and ML)",
     },
     {
       image: "insurance 2.jpg",
       title: "Insurance Analytics",
-      description:
-        "Data-driven insights for better coverage",
+      description: "Data-driven insights for better coverage",
     },
   ];
 
@@ -35,10 +31,10 @@ export default function OverviewContainer() {
       setCurrentSlide((prev) => (prev + 1) % projects.length);
     }, 4000);
     return () => clearInterval(timer);
-  }, []);
+  }, [projects.length]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-12 px-4 mt-5 rounded-xl">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-12 px-4 mt-5 rounded-3xl shadow-lg">
 
       <div className="max-w-7xl mx-auto text-center">
 
@@ -65,11 +61,11 @@ export default function OverviewContainer() {
           ))}
         </div>
 
-
         {/* Carousel Section */}
-        <div className="relative mt-[5px]">
-          <div className="relative h-[600px] bg-gradient-to-br from-purple-100 to-blue-100 rounded-3xl p-8 shadow-2xl overflow-hidden">
-            {/* Background shapes */}
+        <div className="relative mt-2">
+          <div className="relative h-[600px] bg-gradient-to-br from-purple-100 to-blue-100 rounded-3xl p-8 shadow-2xl overflow-hidden flex flex-col justify-center">
+            
+            {/* Background Shapes */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-blue-300 rounded-full opacity-20 animate-pulse" />
             <div
               className="absolute bottom-0 left-0 w-40 h-40 bg-purple-300 rounded-full opacity-20 animate-pulse"
@@ -81,6 +77,7 @@ export default function OverviewContainer() {
               {projects.map((project, idx) => {
                 const position =
                   (idx - currentSlide + projects.length) % projects.length;
+
                 let translateX = 0;
                 let opacity = 0;
                 let scale = 0.9;
@@ -113,21 +110,23 @@ export default function OverviewContainer() {
                       zIndex,
                     }}
                   >
-                    <div className="bg-white rounded-xl overflow-hidden border-[3px] border-slate-800 shadow-2xl transform hover:scale-105 transition-transform">
-                      <div className="bg-slate-800 px-4 py-3 flex items-center gap-2">
-                        <div className="flex gap-1.5">
-                          <div className="w-3 h-3 rounded-full bg-red-500" />
-                          <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                          <div className="w-3 h-3 rounded-full bg-green-500" />
-                        </div>
-                        <div className="flex-1 text-center text-slate-300 text-sm font-medium">
-                          {project.title}
-                        </div>
+                    {/* Image Card */}
+                    <div className="bg-white rounded-2xl overflow-hidden border-[3px] border-slate-800 shadow-2xl transform hover:scale-105 transition-transform">
+                    {/* Browser bar  */}
+                    <div className="bg-slate-800 px-4 py-3 flex items-center gap-2">
+                      <div className="flex gap-1.5">
+                        <div className="w-3 h-3 rounded-full bg-red-500" />
+                        <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                        <div className="w-3 h-3 rounded-full bg-green-500" />
                       </div>
+                    </div>
+
+                      
+                      {/* Image */}
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-[450px] object-cover"
+                        className="w-full h-[450px] object-contain bg-slate-900"
                       />
                     </div>
 
@@ -136,7 +135,7 @@ export default function OverviewContainer() {
                       <h3 className="text-xl font-bold text-slate-900 mb-2">
                         {project.title}
                       </h3>
-                      <p className="text-slate-600">
+                      <p className="text-slate-600 max-w-md mx-auto">
                         {project.description}
                       </p>
                     </div>
