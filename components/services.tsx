@@ -5,7 +5,7 @@ export default function Services() {
   return (
     <section className="w-full flex justify-center mt-10">
 
-      <div className="w-full bg-[#181715] rounded-t-3xl py-16 px-6 md:px-12">
+      <div className="w-full bg-[#181715] rounded-t-3xl py-10 px-6 md:px-12">
                 <h1 className="text-5xl md:text-6xl font-light text-center">
                     <span className="text-white-500 font-normal">Its Simple:</span>
           <span className="text-orange-500 font-normal">Building</span>
@@ -16,6 +16,9 @@ export default function Services() {
           <span className="text-orange-500">Possibilities</span>
         </h2>
         <OverviewContainer />
+        <div className="mt-10 text-center text-white text-lg md:text-xl">
+            <h1>Our goal is clear, build great things with great people. If that’s something we can do together, I’d love to chat.</h1>
+        </div>
       </div>
     </section>
   );
