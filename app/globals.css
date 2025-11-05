@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* === THEME VARIABLES === */
+/* === THEME VARIABLES (optional, for consistency) === */
 :root {
   --background: #020a0a;
   --foreground: #e6fffb;
@@ -8,7 +8,7 @@
   --accent-green: #00ff88;
 }
 
-/* === Tailwind Theme Tokens === */
+/* === Tailwind Theme Tokens (optional, matches your setup) === */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -18,7 +18,7 @@
   --font-mono: var(--font-geist-mono, 'Roboto Mono', monospace);
 }
 
-/* === BASE STYLING === */
+/* === BASE STYLING (keep minimal) === */
 body {
   background: radial-gradient(
       circle at 50% 0%,
@@ -34,7 +34,7 @@ body {
   transition: background 0.6s ease, color 0.3s ease;
 }
 
-/* === Accent Effect === */
+/* === Accent Effect (optional utility) === */
 .glow {
   color: var(--accent);
   text-shadow:
@@ -43,78 +43,8 @@ body {
 }
 
 /* =====================================================
-   THREE-COLUMN CONVERGING SERVICE TAGS LAYOUT
+   SERVICE TAG FLOAT + POSITIONING
    ===================================================== */
-
-/* Main container for the converging layout */
-.service-tags-container {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 3rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-
-/* Left tags column */
-.tags-column-left {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 1.5rem;
-  justify-self: end;
-  padding-right: 2rem;
-}
-
-/* Right tags column */
-.tags-column-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.5rem;
-  justify-self: start;
-  padding-left: 2rem;
-}
-
-/* Center text column */
-.goal-text-center {
-  max-width: 600px;
-  text-align: center;
-  font-size: 1.125rem;
-  line-height: 1.7;
-  color: #fff;
-}
-
-/* Base tag styling */
-.service-tag {
-  position: relative;
-  color: #fff;
-  font-size: 0.9rem;
-  font-weight: 500;
-  padding: 0.7rem 1.4rem;
-  border-radius: 9999px;
-  background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow:
-    0 4px 14px rgba(0, 0, 0, 0.6),
-    inset 0 2px 6px rgba(255, 255, 255, 0.06);
-  white-space: nowrap;
-  transition: all 0.3s ease;
-  cursor: default;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-/* Hover effects */
-.service-tag:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow:
-    0 6px 20px rgba(0, 0, 0, 0.7),
-    inset 0 2px 8px rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.15);
-}
 
 /* Floating animation */
 @keyframes tagFloat {
@@ -126,13 +56,12 @@ body {
   }
 }
 
+/* Base animation applied to all tags */
 .service-tag {
   animation: tagFloat 5s ease-in-out infinite;
 }
 
-/* Individual tag positioning and rotation for depth effect */
-
-/* LEFT COLUMN TAGS - converging TOWARD center */
+/* LEFT COLUMN TAGS */
 .tag-left-1 {
   --rotation: -4deg;
   animation-delay: 0s;
@@ -152,7 +81,7 @@ body {
   margin-left: 0.5rem;
 }
 
-/* RIGHT COLUMN TAGS - converging TOWARD center */
+/* RIGHT COLUMN TAGS */
 .tag-right-1 {
   --rotation: 5deg;
   animation-delay: 0.2s;
@@ -166,63 +95,12 @@ body {
   margin-right: 0.8rem;
 }
 
-/* Icon styling within tags */
-.service-tag .tag-icon {
-  font-size: 1.1rem;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
-}
-
 /* =====================================================
    RESPONSIVE DESIGN
    ===================================================== */
 
-@media (max-width: 1024px) {
-  .service-tags-container {
-    gap: 2rem;
-  }
-  
-  .tags-column-left,
-  .tags-column-right {
-    padding: 0 1rem;
-  }
-  
-  .tag-left-2 {
-    margin-left: 1.5rem;
-  }
-  
-  .tag-right-1 {
-    margin-right: 1.5rem;
-  }
-}
-
+/* Collapse convergence & animation on mobile */
 @media (max-width: 768px) {
-  .service-tags-container {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    padding: 2rem 0;
-  }
-
-  .tags-column-left,
-  .tags-column-right {
-    align-items: center;
-    padding: 0;
-    gap: 1rem;
-  }
-
-  .goal-text-center {
-    order: 2;
-    padding: 0 1rem;
-  }
-
-  .tags-column-left {
-    order: 1;
-  }
-
-  .tags-column-right {
-    order: 3;
-  }
-
-  /* Remove convergence effects on mobile */
   .tag-left-1,
   .tag-left-2,
   .tag-left-3,
@@ -235,16 +113,5 @@ body {
 
   .service-tag {
     animation: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .service-tag {
-    font-size: 0.85rem;
-    padding: 0.6rem 1.2rem;
-  }
-
-  .goal-text-center {
-    font-size: 1rem;
   }
 }
