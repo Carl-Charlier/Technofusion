@@ -2,10 +2,10 @@
 
 /* === THEME VARIABLES === */
 :root {
-  --background: #020a0a; /* deep black-blue base */
-  --foreground: #e6fffb; /* soft light text */
-  --accent: #14e2c4;     /* glowing teal */
-  --accent-green: #00ff88; /* vivid neon green accent */
+  --background: #020a0a;
+  --foreground: #e6fffb;
+  --accent: #14e2c4;
+  --accent-green: #00ff88;
 }
 
 /* === Tailwind Theme Tokens === */
@@ -41,3 +41,51 @@ body {
                0 0 20px rgba(20, 226, 196, 0.3);
 }
 
+/* === FLOATING TAGS ATTACHED TO GOAL === */
+.service-tag-floating {
+  position: absolute;
+  color: #fff;
+  font-size: 0.9rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: 9999px;
+  background: linear-gradient(145deg, #181818, #0a0a0a);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5),
+              inset 0 2px 6px rgba(255, 255, 255, 0.05);
+  white-space: nowrap;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: floatTag 6s ease-in-out infinite;
+  z-index: 5;
+}
+
+.service-tag-floating:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(20, 226, 196, 0.3);
+}
+
+/* === Floating Animation === */
+@keyframes floatTag {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* === Tag Positions Around the Goal Text === */
+.service-tag-1 { top: -3rem; left: 15%; animation-delay: 0s; }
+.service-tag-2 { top: -3.5rem; right: 15%; animation-delay: 0.5s; }
+.service-tag-3 { bottom: -3.2rem; left: 20%; animation-delay: 1s; }
+.service-tag-4 { bottom: -3.8rem; right: 20%; animation-delay: 1.5s; }
+.service-tag-5 { top: 50%; left: -5rem; transform: translateY(-50%); animation-delay: 0.8s; }
+
+/* === Responsive adjustments === */
+@media (max-width: 768px) {
+  .service-tag-floating {
+    position: static;
+    display: block;
+    margin: 0.6rem auto;
+    animation: none;
+  }
+  .goal-text {
+    margin-top: 1rem;
+  }
+}
