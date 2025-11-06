@@ -181,7 +181,7 @@ export default function Home() {
         </div>
       </section>
 
-<section className="relative py-15 px-6 md:px-12 bg-[#0d0d0d] text-white overflow-hidden">
+<section className="relative py-10 px-6 md:px-12 bg-[#0d0d0d] text-white overflow-hidden">
   {/* Intro Paragraph with Underline */}
   <motion.p
     initial={{ opacity: 0, y: 30 }}
