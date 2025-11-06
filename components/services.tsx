@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Pause, Play } from "lucide-react";
 import OverviewContainer from "./overview-container";
 
 const services = [
@@ -68,14 +69,16 @@ const services = [
 
 export default function Services() {
   const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
 
-  // Autoslide every 5 seconds
+  // Autoslide every 5 seconds (unless paused)
   useEffect(() => {
+    if (paused) return;
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % services.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [paused]);
 
   return (
     <section className="w-full flex justify-center mt-8 relative">
@@ -133,9 +136,24 @@ export default function Services() {
 
         {/* === Core Services Carousel === */}
         <div className="mt-20 max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-semibold text-center text-[#00ffcc] mb-12">
-            Our Core Services
-          </h2>
+          <div className="flex items-center justify-center gap-3 mb-8">
+            <h2 className="text-3xl md:text-4xl font-semibold text-center text-[#2600ff]">
+              What we actually build?
+            </h2>
+
+            {/* Pause / Play Button */}
+            <button
+              onClick={() => setPaused((p) => !p)}
+              className="p-2 rounded-full bg-[#222] hover:bg-[#333] border border-[#00ffcc]/40 transition"
+              title={paused ? "Resume slideshow" : "Pause slideshow"}
+            >
+              {paused ? (
+                <Play size={16} className="text-[#00ffcc]" />
+              ) : (
+                <Pause size={16} className="text-[#00ffcc]" />
+              )}
+            </button>
+          </div>
 
           <div className="flex flex-col md:flex-row items-center md:items-start md:justify-between md:gap-24 gap-10">
             {/* LEFT COLUMN - Stacked Cards */}
@@ -151,7 +169,7 @@ export default function Services() {
                     animate={{
                       opacity: isActive ? 1 : 0.5,
                       scale: isActive ? 1.05 : 0.9,
-                      rotate: isActive ? 0 : (offset - 2) * 3,
+                      rotate: isActive ? 0 : (offset - 2) * 5,
                       x: offset * 20,
                       zIndex: isActive ? 10 : 5 - offset,
                     }}
@@ -185,9 +203,12 @@ export default function Services() {
                     {services[current].title}
                   </h3>
                   <p className="text-gray-300 mb-4">{services[current].summary}</p>
-                  <ul className="list-disc list-inside text-gray-400 space-y-1">
+                  <ul className="space-y-2 text-gray-300">
                     {services[current].details.map((detail, i) => (
-                      <li key={i}>{detail}</li>
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-orange-500 mt-1">✔</span>
+                        <span>{detail}</span>
+                      </li>
                     ))}
                   </ul>
                 </motion.div>
