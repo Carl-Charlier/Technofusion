@@ -1,6 +1,6 @@
 "use client";
 import React, { useMemo, useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import Services from "@/components/services";
@@ -11,8 +11,14 @@ const AnimatedParagraph = ({ text }: { text: string }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 80%", "end 20%"], // animate as it enters/leaves view
+    // Begin animation a bit earlier and complete before the section starts exiting
+    offset: ["start 85%", "end 15%"],
   });
+
+  // Normalize progress so that ~80% visible already counts as "fully revealed"
+  const normalized = useTransform(scrollYProgress, [0, 0.8], [0, 1]);
+  // Smooth progress changes so words transition fluidly as you scroll
+  const smooth = useSpring(normalized, { stiffness: 100, damping: 28, mass: 0.4 });
 
   const words = useMemo(() => text.split(" "), [text]);
   const totalWords = words.length;
@@ -21,16 +27,19 @@ const AnimatedParagraph = ({ text }: { text: string }) => {
     <p ref={ref} className="mb-4 leading-relaxed">
       {words.map((word, index) => {
         const start = index / totalWords;
-        const end = start + 0.25;
-        const color = useTransform(scrollYProgress, [start, end], [
-          "#000000",
-          "#ffffff",
+        // Ensure the end of the reveal window never exceeds 1 to avoid words never becoming white
+        const end = Math.min(start + 0.25, 1);
+        // Map smoothed progress into a local 0..1 range for each word, then to color
+        const local = useTransform(smooth, [start, end], [0, 1], { clamp: true });
+        const color = useTransform(local, [0, 1], [
+          "#000000", // start fully black
+          "#ffffff", // transition to white as it reveals
         ]);
         return (
           <motion.span
             key={index}
             style={{ color }}
-            className="inline transition-colors duration-300"
+            className="inline"
           >
             {word}{" "}
           </motion.span>
@@ -88,6 +97,26 @@ export default function Home() {
   const { scrollYProgress } = useScroll();
   const containerRef = useRef(null);
   const [offset, setOffset] = useState(0);
+  
+  // Smooth-scroll helper for CTA/buttons targeting the contact section
+  const scrollToContact = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    if (typeof window === "undefined") return;
+    const target =
+      document.getElementById("contact") ||
+      document.getElementById("contact-me");
+    target?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  // Smooth-scroll helper for Services section (navbar uses #services)
+  const scrollToServices = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    if (typeof window === "undefined") return;
+    const target =
+      document.getElementById("services") ||
+      document.getElementById("projects");
+    target?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   // Ensure we always start at the top on a hard refresh (avoid preserved scroll position)
   useEffect(() => {
@@ -199,11 +228,8 @@ export default function Home() {
         >
           At{" "}
           <span className="text-green-400 font-semibold">Technofusion</span>, we
-          design intelligent software, automation tools, and AI-powered
-          solutions that make organizations{" "}
-          <span className="text-[#ff5c00] font-medium">faster</span>,{" "}
-          <span className="text-[#ff5c00] font-medium">sharper</span>, and more{" "}
-          <span className="text-[#ff5c00] font-medium">connected</span>.
+          design and build software, automation tools, and AI-powered
+          solutions that make organizations faster, smarter and more efficiently{" "}
         </motion.p>
 
         {/* CTA Buttons */}
@@ -215,7 +241,8 @@ export default function Home() {
         >
           {/* Primary CTA */}
           <motion.a
-            href="#projects"
+            href="#services"
+            onClick={scrollToServices}
             whileHover={{ scale: 1.05, y: -3 }}
             whileTap={{ scale: 0.98 }}
             className="group inline-flex flex-1 min-w-0 justify-center text-center items-center gap-2 px-4 py-3 text-sm rounded-xl font-semibold text-black bg-[#00ff7f] md:flex-none md:px-8 md:py-4 md:text-base"
@@ -228,6 +255,7 @@ export default function Home() {
           {/* Secondary CTA */}
           <motion.a
             href="#contact"
+            onClick={scrollToContact}
             whileHover={{ scale: 1.05, y: -3 }}
             whileTap={{ scale: 0.98 }}
             className="group inline-flex flex-1 min-w-0 justify-center text-center items-center gap-2 px-4 py-3 text-sm rounded-xl font-semibold border-2 border-[#00ff7f] text-white md:flex-none md:px-8 md:py-4 md:text-base"
@@ -258,7 +286,7 @@ export default function Home() {
       {/* Process Section */}
       <section
         ref={containerRef}
-        className="relative py-24 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden"
+        className="relative pt-24 pb-8 md:pb-12 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden"
       >
         <div className="text-center mb-20">
           <motion.h2
@@ -291,7 +319,7 @@ export default function Home() {
         </div>
 
         {/* Desktop/Tablet variant */}
-        <div className="hidden md:flex relative justify-center items-center w-full h-[460px]">
+        <div className="hidden md:flex relative justify-center items-center w-full h-[420px]">
           <div className="overflow-hidden w-full max-w-[940px]">
             <motion.div
               animate={{ x: offset === 0 ? "0px" : "-620px" }}
@@ -310,8 +338,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact + Footer */}
-  <section id="contact" className="relative py-10 px-6 md:px-12 bg-[#0d0d0d] text-white overflow-hidden scroll-mt-10">
+    {/* Contact + Footer */}
+  <section id="contact" className="relative pt-6 md:pt-8 pb-10 px-6 md:px-12 bg-[#0d0d0d] text-white overflow-hidden scroll-mt-10">
         {/* Support navbar's #contact-me anchor too */}
         <span id="contact-me" className="absolute -top-24" aria-hidden="true" />
         <motion.p
