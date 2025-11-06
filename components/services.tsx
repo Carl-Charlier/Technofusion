@@ -104,9 +104,10 @@ export default function Services() {
 
         {/* === Converging Service Tags Section === */}
         <div className="relative mt-12">
-          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-8 max-w-[1000px] mx-auto px-3 py-6">
-            {/* LEFT COLUMN - 3 Tags */}
-            <div className="flex flex-col items-end gap-3 justify-self-end pr-4">
+          {/* On mobile, we only show the goal text; tags appear from md and up */}
+          <div className="md:grid md:grid-cols-[1fr_auto_1fr] items-center gap-8 max-w-[1000px] mx-auto px-3 py-4 md:py-6">
+            {/* LEFT COLUMN - 3 Tags (hidden on mobile) */}
+            <div className="hidden md:flex flex-col items-end gap-3 justify-self-end pr-4">
               {["Software & Systems", "AI & Machine Learning", "Data Science"].map(
                 (tag, i) => (
                   <button
@@ -114,8 +115,8 @@ export default function Services() {
                     onClick={() => handleTagClick(i)}
                     className={`service-tag text-xs font-semibold px-4 py-2 rounded-full border border-black/10 shadow-md transition flex items-center gap-1.5 ${
                       current === i
-                        ? "bg-gradient-to-r from-orange-500 to-orange-400 text-white shadow-orange-500/30 scale-105"
-                        : "bg-white text-[#181715] hover:-translate-y-[2px] hover:scale-[1.02] hover:shadow-lg"
+                        ? "bg-linear-to-r from-orange-500 to-orange-400 text-white shadow-orange-500/30 scale-105"
+                        : "bg-white text-[#181715] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-lg"
                     }`}
                   >
                     {i === 0 ? "💻" : i === 1 ? "🤖" : "📊"} {tag}
@@ -125,23 +126,23 @@ export default function Services() {
             </div>
 
             {/* CENTER COLUMN - Goal Text */}
-            <div className="max-w-[400px] text-center text-white text-sm leading-relaxed">
+            <div className="max-w-[480px] mx-auto text-center text-white text-base md:text-sm leading-relaxed px-1">
               <h1>
                 Our goal is clear — build great things with great people. If that's
                 something we can do together, I'd love to chat.
               </h1>
             </div>
 
-            {/* RIGHT COLUMN - 2 Tags */}
-            <div className="flex flex-col items-start gap-3 justify-self-start pl-4">
+            {/* RIGHT COLUMN - 2 Tags (hidden on mobile) */}
+            <div className="hidden md:flex flex-col items-start gap-3 justify-self-start pl-4">
               {["Automation Systems", "AI Integration"].map((tag, i) => (
                 <button
                   key={i + 3}
                   onClick={() => handleTagClick(i + 3)}
                   className={`service-tag text-xs font-semibold px-4 py-2 rounded-full border border-black/10 shadow-md transition flex items-center gap-1.5 ${
                     current === i + 3
-                      ? "bg-gradient-to-r from-orange-500 to-orange-400 text-white shadow-orange-500/30 scale-105"
-                      : "bg-white text-[#181715] hover:-translate-y-[2px] hover:scale-[1.02] hover:shadow-lg"
+                      ? "bg-linear-to-r from-orange-500 to-orange-400 text-white shadow-orange-500/30 scale-105"
+                      : "bg-white text-[#181715] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-lg"
                   }`}
                 >
                   {i === 0 ? "⚙️" : "🌐"} {tag}
@@ -191,7 +192,7 @@ export default function Services() {
                       zIndex: isActive ? 10 : 5 - offset,
                     }}
                     transition={{ type: "spring", stiffness: 120, damping: 20 }}
-                    className={`absolute bg-[#0a0a0a] border border-[#00ffaa]/10 rounded-2xl shadow-lg w-[250px] h-[160px] p-4 text-white flex flex-col justify-between ${
+                    className={`absolute bg-[#0a0a0a] border border-[#00ffaa]/10 rounded-2xl shadow-lg w-[250px] h-40 p-4 text-white flex flex-col justify-between ${
   isActive
     ? "shadow-[0_0_25px_#00ffaa80] shadow-[#00ffaa]/40 scale-105"
     : "opacity-60"
@@ -226,7 +227,7 @@ export default function Services() {
                   <ul className="space-y-2 text-gray-300">
                     {services[current].details.map((detail, i) => (
                       <li key={i} className="flex items-start gap-2">
-                        <Check className="w-4 h-4 mt-1 text-orange-500 flex-shrink-0" />
+                        <Check className="w-4 h-4 mt-1 text-orange-500 shrink-0" />
                         <span>{detail}</span>
                       </li>
                     ))}
