@@ -141,7 +141,7 @@ export default function Home() {
   const paragraphs = [
     "Technofusion is a premier technology hub based in Nairobi, Kenya, dedicated to delivering intelligent, data-driven, and automated solutions that empower organizations to operate smarter and more efficiently.",
     "We specialize in developing advanced digital systems, integrating artificial intelligence (AI) into everyday business operations, and creating intelligent platforms that drive innovation across multiple industries — from logistics and transport to finance, healthcare, manufacturing, and beyond.",
-    "At Technofusion, we believe in AI for Everywhere — building intelligent solutions that enhance productivity, enable automation, and transform decision-making processes across all sectors.",
+    "Building intelligent solutions that enhance productivity, enable automation, and transform decision-making processes across all sectors.",
   ];
 
   const steps = [
