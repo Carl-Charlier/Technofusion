@@ -29,8 +29,8 @@ export default function OverviewContainer() {
     },
     {
       image: "Business Finance Asssistant(AI Agent).png",
-      title: "Business Finance  Assistant",
-      description: "Financial intelligence and automation for growth",
+      title: "Business Finance Agent",
+      description: "Mpesa and Bank statement analysis using AI",
     },
   ];
 
