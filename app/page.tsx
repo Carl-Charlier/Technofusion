@@ -102,7 +102,7 @@ export default function Home() {
     {
       number: "1",
       title: "Discover & Strategize",
-      desc: "We begin by understanding your goals, challenges, and opportunities to craft a data-driven roadmap tailored to your business.",
+      desc: "We begin by understanding your goals, challenges, and opportunities to craft a roadmap tailored to your business.",
     },
     {
       number: "2",
@@ -112,7 +112,7 @@ export default function Home() {
     {
       number: "3",
       title: "Build & Integrate",
-      desc: "We develop, train, and integrate intelligent systems seamlessly into your existing operations.",
+      desc: "We develop, train, and integrate systems seamlessly into your existing operations.",
     },
     {
       number: "4",
@@ -122,7 +122,7 @@ export default function Home() {
     {
       number: "5",
       title: "Deploy & Evolve",
-      desc: "We launch, monitor, and continuously improve through updates and retraining — keeping your systems learning and adapting.",
+      desc: "Launch, monitor, and continuously improve through updates and retraining — keeping your systems learning and adapting.",
     },
   ];
 

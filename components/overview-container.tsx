@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export default function OverviewContainer() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   const projects = [
@@ -23,22 +24,23 @@ export default function OverviewContainer() {
     },
     {
       image: "insurance 2.jpg",
-      title: "Insurance Analytics",
-      description: "Data-driven insights for better coverage",
+      title: "Insurance comparisons AI Tool",
+      description: " Insights for better coverage",
     },
     {
-      image: "business finance.jpg",
-      title: "Business Finance",
+      image: "Business Finance Asssistant(AI Agent).png",
+      title: "Business Finance  Assistant",
       description: "Financial intelligence and automation for growth",
     },
   ];
 
   useEffect(() => {
+    if (isPaused) return; // do not auto-advance when paused (pressed/tapped)
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % projects.length);
     }, 4000);
     return () => clearInterval(timer);
-  }, [projects.length]);
+  }, [projects.length, isPaused]);
 
   // Track viewport to tailor layout for mobile without affecting desktop
   useEffect(() => {
@@ -62,6 +64,7 @@ export default function OverviewContainer() {
   // simple swipe handlers for mobile smooth navigation
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const onTouchStart: React.TouchEventHandler<HTMLDivElement> = (e) => {
+    setIsPaused(true);
     setTouchStartX(e.changedTouches[0].clientX);
   };
   const onTouchEnd: React.TouchEventHandler<HTMLDivElement> = (e) => {
@@ -74,6 +77,21 @@ export default function OverviewContainer() {
       setCurrentSlide((s) => (s - 1 + projects.length) % projects.length);
     }
     setTouchStartX(null);
+    setIsPaused(false);
+  };
+
+  // Pause/resume on pointer interactions (covers mouse and touch on supporting browsers)
+  const onPointerDown: React.PointerEventHandler<HTMLDivElement> = () => {
+    setIsPaused(true);
+  };
+  const onPointerUp: React.PointerEventHandler<HTMLDivElement> = () => {
+    setIsPaused(false);
+  };
+  const onPointerCancel: React.PointerEventHandler<HTMLDivElement> = () => {
+    setIsPaused(false);
+  };
+  const onPointerLeave: React.PointerEventHandler<HTMLDivElement> = () => {
+    setIsPaused(false);
   };
 
   return (
@@ -83,7 +101,13 @@ export default function OverviewContainer() {
 
         {/* Carousel Section */}
         <div className="relative mt-1 md:mt-2">
-          <div className="relative h-auto md:h-[600px] bg-linear-to-br from-purple-100 to-blue-100 rounded-2xl md:rounded-3xl p-3 md:p-8 shadow-2xl overflow-hidden flex flex-col md:justify-center">
+          <div
+            className="relative h-auto md:h-[600px] bg-linear-to-br from-purple-100 to-blue-100 rounded-2xl md:rounded-3xl p-3 md:p-8 shadow-2xl overflow-hidden flex flex-col md:justify-center"
+            onPointerDown={onPointerDown}
+            onPointerUp={onPointerUp}
+            onPointerCancel={onPointerCancel}
+            onPointerLeave={onPointerLeave}
+          >
             
             {/* Background Shapes */}
             <div className="absolute top-0 right-0 w-20 h-20 md:w-32 md:h-32 bg-blue-300 rounded-full opacity-20 animate-pulse" />
