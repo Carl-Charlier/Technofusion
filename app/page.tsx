@@ -181,6 +181,90 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="relative py-24 px-6 md:px-12 bg-[#0d0d0d] text-white overflow-hidden">
+  <div className="max-w-5xl mx-auto text-center">
+    <motion.p
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      className="text-lg md:text-xl text-gray-300 mb-12 leading-relaxed"
+    >
+      If you are seeing this website, you have already taken the first step to taking your brand beyond the ordinary.
+    </motion.p>
+
+    <motion.h2
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="text-4xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#ff5c00] via-[#ff3a00] to-[#ff6a00]"
+    >
+      Let's Connect and Build the Future
+    </motion.h2>
+
+    <form
+      action="https://api.web3forms.com/submit"
+      method="POST"
+      className="relative bg-[#141414] border border-[#222] rounded-2xl shadow-[0_0_40px_rgba(0,255,127,0.08)] p-10 text-left space-y-6 max-w-3xl mx-auto"
+    >
+      <input type="hidden" name="access_key" value="270e73cd-19bf-469a-b036-9df3ff999945" />
+
+      <div>
+        <label className="block mb-2 text-gray-400 font-medium">Full Name</label>
+        <input
+          type="text"
+          name="name"
+          required
+          placeholder="Your full name"
+          className="w-full bg-transparent border border-gray-700 focus:border-[#00ff7f] rounded-xl px-4 py-3 text-gray-200 placeholder-gray-500 outline-none transition-all"
+        />
+      </div>
+
+      <div>
+        <label className="block mb-2 text-gray-400 font-medium">Email Address</label>
+        <input
+          type="email"
+          name="email"
+          required
+          placeholder="your@email.com"
+          className="w-full bg-transparent border border-gray-700 focus:border-[#00ff7f] rounded-xl px-4 py-3 text-gray-200 placeholder-gray-500 outline-none transition-all"
+        />
+      </div>
+
+      <div>
+        <label className="block mb-2 text-gray-400 font-medium">Your Message</label>
+        <textarea
+          name="message"
+          rows={5}
+          required
+          placeholder="Share your idea, challenge, or vision..."
+          className="w-full bg-transparent border border-gray-700 focus:border-[#00ff7f] rounded-xl px-4 py-3 text-gray-200 placeholder-gray-500 outline-none transition-all"
+        ></textarea>
+      </div>
+
+      <motion.button
+        whileHover={{
+          scale: 1.05,
+          boxShadow: "0 0 20px rgba(0,255,127,0.6)",
+          backgroundColor: "#00ff7f",
+        }}
+        whileTap={{ scale: 0.96 }}
+        type="submit"
+        className="w-full bg-[#00cc66] hover:bg-[#00ff7f] text-black font-semibold rounded-xl py-3 text-lg tracking-wide transition-all"
+      >
+        Send Message 🚀
+      </motion.button>
+    </form>
+
+    <div className="mt-10 text-gray-400 text-sm leading-relaxed space-y-1">
+      <p>📞 +254 768094564 &nbsp; | &nbsp; +254 731064012</p>
+      <p>📧 fredjm40@gmail.com &nbsp; | &nbsp; alicengome2013@gmail.com</p>
+      <p className="text-[#00ff7f] mt-2 font-medium">Technofusion — Intelligent Systems for a Smarter Future</p>
+    </div>
+  </div>
+</section>
+
+    
+
       <Footer />
     </main>
   );
