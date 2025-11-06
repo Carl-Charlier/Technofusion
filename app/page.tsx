@@ -181,87 +181,178 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative py-24 px-6 md:px-12 bg-[#0d0d0d] text-white overflow-hidden">
-  <div className="max-w-5xl mx-auto text-center">
-    <motion.p
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-      className="text-lg md:text-xl text-gray-300 mb-12 leading-relaxed"
-    >
+<section className="relative py-15 px-6 md:px-12 bg-[#0d0d0d] text-white overflow-hidden">
+  {/* Intro Paragraph with Underline */}
+  <motion.p
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, ease: "easeOut" }}
+    className="relative text-center text-lg md:text-xl text-gray-300 mb-16 leading-relaxed max-w-3xl mx-auto"
+  >
+    <span className="text-gray-400">
       If you are seeing this website, you have already taken the first step to taking your brand beyond the ordinary.
-    </motion.p>
+    </span>
 
-    <motion.h2
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="text-4xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#ff5c00] via-[#ff3a00] to-[#ff6a00]"
+    {/* Animated single-color underline */}
+    <motion.span
+      initial={{ width: 0 }}
+      whileInView={{ width: "80%" }}
+      transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+      className="block h-[2px] mt-4 mx-auto bg-[#ff5c00] rounded-full shadow-[0_0_12px_#ff5c00]"
+    />
+  </motion.p>
+
+  <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-start justify-between gap-16">
+    {/* Left Side - Contact Info & Arrow */}
+    <motion.div
+      initial={{ opacity: 0, x: -30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      className="w-full md:w-1/2 flex flex-col justify-center text-left space-y-6"
     >
-      Let's Connect and Build the Future
-    </motion.h2>
-
-    <form
-      action="https://api.web3forms.com/submit"
-      method="POST"
-      className="relative bg-[#141414] border border-[#222] rounded-2xl shadow-[0_0_40px_rgba(0,255,127,0.08)] p-10 text-left space-y-6 max-w-3xl mx-auto"
-    >
-      <input type="hidden" name="access_key" value="270e73cd-19bf-469a-b036-9df3ff999945" />
-
-      <div>
-        <label className="block mb-2 text-gray-400 font-medium">Full Name</label>
-        <input
-          type="text"
-          name="name"
-          required
-          placeholder="Your full name"
-          className="w-full bg-transparent border border-gray-700 focus:border-[#00ff7f] rounded-xl px-4 py-3 text-gray-200 placeholder-gray-500 outline-none transition-all"
-        />
-      </div>
-
-      <div>
-        <label className="block mb-2 text-gray-400 font-medium">Email Address</label>
-        <input
-          type="email"
-          name="email"
-          required
-          placeholder="your@email.com"
-          className="w-full bg-transparent border border-gray-700 focus:border-[#00ff7f] rounded-xl px-4 py-3 text-gray-200 placeholder-gray-500 outline-none transition-all"
-        />
-      </div>
-
-      <div>
-        <label className="block mb-2 text-gray-400 font-medium">Your Message</label>
-        <textarea
-          name="message"
-          rows={5}
-          required
-          placeholder="Share your idea, challenge, or vision..."
-          className="w-full bg-transparent border border-gray-700 focus:border-[#00ff7f] rounded-xl px-4 py-3 text-gray-200 placeholder-gray-500 outline-none transition-all"
-        ></textarea>
-      </div>
-
-      <motion.button
-        whileHover={{
-          scale: 1.05,
-          boxShadow: "0 0 20px rgba(0,255,127,0.6)",
-          backgroundColor: "#00ff7f",
-        }}
-        whileTap={{ scale: 0.96 }}
-        type="submit"
-        className="w-full bg-[#00cc66] hover:bg-[#00ff7f] text-black font-semibold rounded-xl py-3 text-lg tracking-wide transition-all"
+      <motion.div
+        initial={{ opacity: 0, x: -10 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.3 }}
+        className="flex items-center space-x-3"
       >
-        Send Message 🚀
-      </motion.button>
-    </form>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-10 h-10 text-[#00ff7f]"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+        <p className="text-[#00ff7f] text-2xl font-semibold">
+          Leave something here
+        </p>
+      </motion.div>
 
-    <div className="mt-10 text-gray-400 text-sm leading-relaxed space-y-1">
-      <p>📞 +254 768094564 &nbsp; | &nbsp; +254 731064012</p>
-      <p>📧 fredjm40@gmail.com &nbsp; | &nbsp; alicengome2013@gmail.com</p>
-      <p className="text-[#00ff7f] mt-2 font-medium">Technofusion — Intelligent Systems for a Smarter Future</p>
-    </div>
+      <div className="text-gray-300 space-y-3 mt-8">
+        <div className="space-y-2 mt-6">
+          <p>📞 +254 768094564 &nbsp; | &nbsp; +254 731064012</p>
+          <p>📧 fredjm40@gmail.com &nbsp; | &nbsp; alicengome2013@gmail.com</p>
+          <p className="text-[#00ff7f] mt-2 font-medium">
+            Better systems for a Smarter Future
+          </p>
+        </div>
+      </div>
+    </motion.div>
+
+    {/* Right Side - Form */}
+<motion.form
+  initial={{ opacity: 0, x: 30 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.7, ease: "easeOut" }}
+  onSubmit={async (e) => {
+    e.preventDefault();
+
+    const form = e.currentTarget as HTMLFormElement;
+    const formData = new FormData(form);
+    const statusEl = form.querySelector<HTMLParagraphElement>("#form-status");
+
+    if (!statusEl) return; 
+
+    statusEl.textContent = "Sending...";
+    statusEl.className =
+      "text-sm text-[#00ff7f] animate-pulse font-medium mt-2";
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        statusEl.textContent = " Message sent successfully!";
+        statusEl.className =
+          "text-sm text-[#00ff7f] font-medium mt-2 transition-all";
+        form.reset();
+
+        setTimeout(() => {
+          if (statusEl) statusEl.textContent = "";
+        }, 5000);
+      } else {
+        statusEl.textContent = " Something went wrong. Please try again.";
+        statusEl.className = "text-sm text-red-500 font-medium mt-2";
+      }
+    } catch (error) {
+      if (statusEl) {
+        statusEl.textContent = " Network error. Please check your connection.";
+        statusEl.className = "text-sm text-red-500 font-medium mt-2";
+      }
+    }
+  }}
+  className="w-full md:w-1/2 bg-[#141414] border border-[#222] rounded-2xl shadow-[0_0_35px_rgba(0,255,127,0.08)] p-10 space-y-6"
+>
+  <input
+    type="hidden"
+    name="access_key"
+    value="270e73cd-19bf-469a-b036-9df3ff999945"
+  />
+
+  <div>
+    <label className="block mb-2 text-gray-400 font-medium">Full Name</label>
+    <input
+      type="text"
+      name="name"
+      placeholder="Your full name"
+      required
+      className="w-full bg-transparent border border-gray-700 focus:border-[#00ff7f] rounded-xl px-4 py-3 text-gray-200 placeholder-gray-500 outline-none transition-all"
+    />
+  </div>
+
+  <div>
+    <label className="block mb-2 text-gray-400 font-medium">Email Address</label>
+    <input
+      type="email"
+      name="email"
+      placeholder="your@email.com"
+      required
+      className="w-full bg-transparent border border-gray-700 focus:border-[#00ff7f] rounded-xl px-4 py-3 text-gray-200 placeholder-gray-500 outline-none transition-all"
+    />
+  </div>
+
+  <div>
+    <label className="block mb-2 text-gray-400 font-medium">Your Message</label>
+    <textarea
+      name="message"
+      rows={5}
+      placeholder="Share your idea, challenge, or vision..."
+      required
+      className="w-full bg-transparent border border-gray-700 focus:border-[#00ff7f] rounded-xl px-4 py-3 text-gray-200 placeholder-gray-500 outline-none transition-all"
+    ></textarea>
+  </div>
+
+  {/* Status text */}
+  <p id="form-status" className="text-sm mt-2 h-5"></p>
+
+  <div className="flex justify-end pt-2">
+    <motion.button
+      whileHover={{
+        scale: 1.05,
+        boxShadow: "0 0 15px rgba(0,255,127,0.6)",
+        backgroundColor: "#00ff7f",
+      }}
+      whileTap={{ scale: 0.95 }}
+      type="submit"
+      className="bg-[#00cc66] hover:bg-[#00ff7f] text-black font-semibold rounded-lg px-6 py-2 text-sm tracking-wide transition-all"
+    >
+      Send 
+    </motion.button>
+  </div>
+</motion.form>
+
+
   </div>
 </section>
+
+
 
     
 
