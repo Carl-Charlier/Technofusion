@@ -5,7 +5,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import Services from "@/components/services";
 
-// ✅ Reusable paragraph animation component
+// Reusable paragraph animation component
 const AnimatedParagraph = ({ text }: { text: string }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -39,7 +39,7 @@ const AnimatedParagraph = ({ text }: { text: string }) => {
   );
 };
 
-// ✅ Card component (unchanged)
+// Card component (unchanged)
 const Card = ({
   step,
   hasConnector = false,
@@ -162,7 +162,7 @@ export default function Home() {
         </motion.p>
       </div>
 
-      {/* ✅ About Section with word-by-word animation */}
+      {/* About Section with word-by-word animation */}
       <section className="relative p-2 max-w-7xl mx-auto text-lg md:text-xl leading-relaxed">
         <motion.h2
           className="text-3xl md:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#ff5c00] via-[#ff3a00] to-[#ff6a00]"

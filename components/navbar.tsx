@@ -5,25 +5,22 @@ import { useEffect, useState } from "react";
 export default function Navbar() {
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [scrolled, setScrolled] = useState(false); // for background visibility
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // Detect scrolling direction
+      // Hide navbar when scrolling down
       if (currentScrollY > lastScrollY && currentScrollY > 80) {
         setVisible(false);
       } else {
         setVisible(true);
       }
 
-      // Detect scroll position for background
-      if (currentScrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      // Add background blur when scrolled
+      setScrolled(currentScrollY > 50);
 
       setLastScrollY(currentScrollY);
     };
@@ -45,24 +42,52 @@ export default function Navbar() {
           }`}
       >
         {/* Brand */}
-        <div className="text-xl md:text-3xl font-bold tracking-widest text-[#ffdca8] hover:text-black transition-colors duration-300 cursor-pointer">
+        <div className="text-xl md:text-3xl font-bold tracking-widest text-[#ffa8a8] hover:font-extrabold transition-none cursor-pointer">
           Technofusion
         </div>
 
-        {/* Nav Links */}
-        <ul className="flex items-center justify-center space-x-8 md:space-x-16 text-lg md:text-xl font-light">
+        {/* Desktop Links */}
+        <ul className="hidden md:flex items-center justify-center space-x-8 md:space-x-16 text-lg md:text-xl font-light">
           {links.map((item) => (
             <li key={item}>
               <a
                 href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
-                className="text-[#ffdca8] hover:text-black transition-colors duration-300"
+                className="text-[#ffdca8] hover:font-medium transition-none"
               >
                 {item}
               </a>
             </li>
           ))}
         </ul>
+
+        {/* Hamburger Menu (no circle) */}
+        <button
+          className="md:hidden text-[#ffdca8] text-3xl focus:outline-none"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? "✕" : "☰"}
+        </button>
       </nav>
+
+      {/* Mobile Menu Dropdown */}
+      {menuOpen && (
+        <div
+          className={`fixed top-20 left-0 w-full bg-black/90 backdrop-blur-md text-center text-lg font-light text-[#ffdca8] py-6 space-y-6 md:hidden transition-all duration-500 z-[9999] ${
+            visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+          }`}
+        >
+          {links.map((item) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
+              className="block hover:font-medium transition-none"
+              onClick={() => setMenuOpen(false)}
+            >
+              {item}
+            </a>
+          ))}
+        </div>
+      )}
     </>
   );
 }
