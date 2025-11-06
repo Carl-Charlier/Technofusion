@@ -237,8 +237,6 @@ export default function Home() {
 
       {/* Projects/Services anchor */}
       <section id="projects" className="relative scroll-mt-28">
-        {/* Alias anchor so the navbar's Services link (#services) lands at this section */}
-        <span id="services" className="absolute -top-24" aria-hidden="true" />
         <Services />
       </section>
 

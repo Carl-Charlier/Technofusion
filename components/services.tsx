@@ -152,7 +152,7 @@ export default function Services() {
         </div>
 
         {/* === Core Services Carousel === */}
-        <div className="mt-20 max-w-6xl mx-auto px-4">
+        <div id="services" className="mt-20 max-w-6xl mx-auto px-4 scroll-mt-28">
           <div className="flex items-center justify-center gap-3 mb-10">
             <h2 className="text-3xl md:text-4xl font-semibold text-center text-[#ff2f00]">
               What we actually build?
