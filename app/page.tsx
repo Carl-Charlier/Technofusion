@@ -200,12 +200,12 @@ export default function Home() {
         >
           {/* Primary CTA */}
           <motion.a
-            href="#contact"
+            href="#projects"
             whileHover={{ scale: 1.05, y: -3 }}
             whileTap={{ scale: 0.98 }}
-            className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-white bg-linear-to-r from-[#ff5c00] via-[#ff3a00] to-[#ff6a00] shadow-[0_10px_30px_rgba(255,90,0,0.35)]"
+            className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-black bg-[#00ff7f]"
           >
-            Get Started
+            See what we build
             <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
           </motion.a>
 
@@ -214,7 +214,7 @@ export default function Home() {
             href="#contact"
             whileHover={{ scale: 1.05, y: -3 }}
             whileTap={{ scale: 0.98 }}
-            className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold border-2 border-[#ff5c00] text-white hover:border-[#ff6a00]"
+            className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold border-2 border-[#00ff7f] text-white"
           >
             <span className="flex items-center gap-2">Let's Talk</span>
           </motion.a>
@@ -234,7 +234,10 @@ export default function Home() {
         ))}
       </section>
 
-      <Services />
+      {/* Projects/Services anchor */}
+      <section id="projects">
+        <Services />
+      </section>
 
       {/* Process Section */}
       <section
