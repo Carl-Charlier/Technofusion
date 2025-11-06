@@ -86,7 +86,7 @@ export default function Services() {
 
   return (
     <section className="w-full flex justify-center mt-8 relative">
-      <div className="w-full bg-[#181715] rounded-t-3xl rounded-bl-[5rem] py-8 px-4 md:px-8 relative overflow-hidden">
+      <div className="w-full bg-[#181715] rounded-t-3xl rounded-bl-[5rem] py-6 md:py-8 px-4 md:px-8 relative overflow-hidden">
         {/* === Section Title === */}
         <h1 className="text-3xl md:text-4xl font-light text-center">
           <span className="text-white font-normal">It's Simple:</span>{" "}
@@ -103,9 +103,9 @@ export default function Services() {
         <OverviewContainer />
 
         {/* === Converging Service Tags Section === */}
-        <div className="relative mt-12">
+        <div className="relative mt-8 md:mt-12">
           {/* On mobile, we only show the goal text; tags appear from md and up */}
-          <div className="md:grid md:grid-cols-[1fr_auto_1fr] items-center gap-8 max-w-[1000px] mx-auto px-3 py-4 md:py-6">
+          <div className="md:grid md:grid-cols-[1fr_auto_1fr] items-center gap-6 md:gap-8 max-w-[1000px] mx-auto px-3 py-3 md:py-6">
             {/* LEFT COLUMN - 3 Tags (hidden on mobile) */}
             <div className="hidden md:flex flex-col items-end gap-3 justify-self-end pr-4">
               {["Software & Systems", "AI & Machine Learning", "Data Science"].map(
@@ -153,8 +153,8 @@ export default function Services() {
         </div>
 
         {/* === Core Services Carousel === */}
-        <div id="services" className="mt-20 max-w-6xl mx-auto px-4 scroll-mt-28">
-          <div className="flex items-center justify-center gap-3 mb-10">
+        <div id="services" className="mt-12 md:mt-20 max-w-6xl mx-auto px-4 scroll-mt-28">
+          <div className="flex items-center justify-center gap-2 md:gap-3 mb-6 md:mb-10">
             <h2 className="text-3xl md:text-4xl font-semibold text-center text-[#ff2f00]">
               What we actually build?
             </h2>
@@ -173,9 +173,9 @@ export default function Services() {
             </button>
           </div>
 
-          <div className="flex flex-col md:flex-row items-center md:items-start md:justify-between md:gap-28 gap-10">
+          <div className="flex flex-col md:flex-row items-center md:items-start md:justify-between gap-6 md:gap-10 lg:gap-28">
             {/* LEFT COLUMN - Stacked Cards */}
-            <div className="relative w-full md:w-2/5 h-[300px] flex justify-center items-center">
+            <div className="relative w-full md:w-2/5 h-[260px] md:h-[300px] flex justify-center items-center">
               {services.map((service, index) => {
                 const isActive = index === current;
                 const offset = (index - current + services.length) % services.length;
