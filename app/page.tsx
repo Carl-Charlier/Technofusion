@@ -51,12 +51,12 @@ const Card = ({
   <div className="relative flex flex-col items-center shrink-0 w-[220px] sm:w-[240px] md:w-[280px]">
     <motion.div
       whileHover={{ y: -6, scale: 1.02 }}
-      className="relative bg-white text-black rounded-3xl border-[3px] border-[#ff5c00] shadow-[0_5px_25px_rgba(0,0,0,0.25)] w-full h-[340px] p-5 md:p-8 z-10 scale-90 md:scale-100"
+      className="relative bg-white text-black rounded-3xl border-[3px] border-[#ff5c00] shadow-[0_5px_25px_rgba(0,0,0,0.25)] w-full h-auto md:h-[340px] p-4 md:p-8 z-10 scale-90 md:scale-100"
     >
       <span className="text-3xl md:text-5xl font-bold text-[#ff5c00] mb-2 md:mb-3 block">
         {step.number}
       </span>
-      <h3 className="text-base md:text-xl font-semibold mb-2 md:mb-3">{step.title}</h3>
+      <h3 className="text-base md:text-xl font-semibold mb-1 md:mb-3">{step.title}</h3>
       <p className="text-sm md:text-base text-gray-600 leading-relaxed">{step.desc}</p>
     </motion.div>
 
@@ -311,7 +311,7 @@ export default function Home() {
       </section>
 
       {/* Contact + Footer */}
-  <section id="contact" className="relative py-10 px-6 md:px-12 bg-[#0d0d0d] text-white overflow-hidden scroll-mt-28">
+  <section id="contact" className="relative py-10 px-6 md:px-12 bg-[#0d0d0d] text-white overflow-hidden scroll-mt-10">
         {/* Support navbar's #contact-me anchor too */}
         <span id="contact-me" className="absolute -top-24" aria-hidden="true" />
         <motion.p
